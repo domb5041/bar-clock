@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>bar clock</title>
+		<style type="text/css">
+
+
+			@font-face { font-family: 'alien'; src: url('LED Dot-Matrix.ttf'); }
+
+			body{
+				margin: 0;
+				background-color: #212121;
+			}
+
+			#chartContainer{
+				height: 100vh;
+				justify-content: center;
+				display: flex;
+			}
+
+			
+			.barContainer{
+
+				min-width: 120px;
+  				max-width: 200px;
+  				flex-basis: auto;
+  				flex-grow: 1;
+				margin: 10px;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-end;
+			}
+
+			
+
+			.label{
+				text-align: center;
+				font-family: 'alien';
+				font-size: 15px;
+				margin-bottom: 3px;
+				line-height: 0px;
+			}
+
+			#secondBar{
+				background-color: #FF5722;			
+			}
+
+			#secondLabel{
+				color: #212121;
+				background-color: #FFCDD2;
+			}
+
+
+			#minuteBar{
+				background-color: #03A9F4;			
+			}
+
+			#minuteLabel{
+				color: #212121;
+				background-color: #B3E5FC;
+			}
+
+			#hourBar{
+				background-color: #8BC34A;			
+			}
+
+			#hourLabel{
+				color: #212121;
+				background-color: #DCEDC8;
+			}
+
+			#dayBar{
+				background-color: #E91E63;			
+			}
+
+			#dayLabel{
+				color: #212121;
+				background-color: #F8BBD0;
+			}
+
+			#monthBar{
+				background-color: #FFC107;			
+			}
+
+			#monthLabel{
+				color: #212121;
+				background-color: #FFECB3;
+			}
+
+
+
+
+
+
+		</style>
+	</head>
+
+	<body>
+		<div id="chartContainer">
+
+			<div class='barContainer' id="monthBarContainer">
+				<div class='label' id='monthLabel'>
+					<p id='monthText'></p>
+				</div>
+				<div class='bar' id='monthBar'></div>
+				
+			</div>	
+
+
+			<div class='barContainer' id="dayBarContainer">
+				<div class='label' id='dayLabel'>
+					<p id='dayText'></p>
+				</div>
+				<div class='bar' id='dayBar'></div>
+				
+			</div>	
+
+			<div class='barContainer' id="hourBarContainer">
+				<div class='label' id='hourLabel'>
+					<p id='hourText'></p>
+				</div>
+				<div class='bar' id='hourBar'></div>
+				
+			</div>						
+			
+			<div class='barContainer' id="minuteBarContainer">
+				<div class='label' id='minuteLabel'>
+					<p id='minuteText'></p>
+				</div>
+				<div class='bar' id='minuteBar'></div>
+				
+			</div>
+
+			<div class='barContainer' id="secondBarContainer">
+				<div class='label' id='secondLabel'>
+					<p id='secondText'></p>
+				</div>
+				<div class='bar' id='secondBar'></div>
+				
+			</div>			
+
+
+		</div>
+		
+		<script type="text/javascript">
+			function updateBar(){
+
+				var maxHeight = window.innerHeight - 50;
+				var scaleSecond = maxHeight/60;
+				var scaleMinute = maxHeight/60;
+				var scaleHour = maxHeight/24;
+				var scaleWeek = maxHeight/31;
+				var scaleMonth = maxHeight/12;
+
+
+				var d = new Date();
+				var month = d.getMonth();
+				var day = d.getDate();
+				var hour = d.getHours();
+				var minute = d.getMinutes();
+				var second = d.getSeconds();
+
+
+				document.getElementById("secondText").innerHTML = second + ' seconds';
+				document.getElementById("minuteText").innerHTML = minute + ' minutes';
+				document.getElementById("hourText").innerHTML = hour + ' hours';
+				document.getElementById("dayText").innerHTML = day - 1 + ' days';
+				document.getElementById("monthText").innerHTML = month + ' months';
+
+				document.getElementById('secondBar').style.height = second * scaleSecond + 'px';
+				document.getElementById('minuteBar').style.height = minute * scaleMinute + 'px';
+				document.getElementById('hourBar').style.height = hour * scaleHour + 'px';
+				document.getElementById('dayBar').style.height = (day-1) * scaleWeek + 'px';
+				document.getElementById('monthBar').style.height = month * scaleMonth + 'px';
+
+
+
+				setTimeout(updateBar, 1000);
+
+			}
+
+			updateBar();
+				
+			
+
+
+
+		</script>
+	</body>
+</html>
